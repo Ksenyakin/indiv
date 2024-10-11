@@ -4,8 +4,8 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
-	"github.com/yourusername/auction-system/pkg/config"
+	"github.com/lib/pq"
+	"indiv/pkg/config"
 )
 
 func NewPostgresConnection(cfg config.DatabaseConfig) (*sql.DB, error) {

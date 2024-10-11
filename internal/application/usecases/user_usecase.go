@@ -1,7 +1,11 @@
+// internal/application/usecases/user_usecase.go
+
 package usecases
 
 import (
 	"context"
+	"errors"
+
 	"indiv/internal/domain/entities"
 	"indiv/internal/domain/repositories"
 )
@@ -28,9 +32,13 @@ func (uc *UserUseCase) UpdateUser(ctx context.Context, user *entities.User) erro
 
 func (uc *UserUseCase) TopUpBalance(ctx context.Context, userID int64, amount float64) error {
 	user, err := uc.userRepo.GetByID(ctx, userID)
-	if err != nil || user == nil {
+	if err != nil {
 		return err
 	}
+	if user == nil {
+		return errors.New("Пользователь не найден")
+	}
+
 	user.Balance += amount
 	return uc.userRepo.Update(ctx, user)
 }

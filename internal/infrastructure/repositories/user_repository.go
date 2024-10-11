@@ -1,18 +1,21 @@
 // internal/infrastructure/repositories/user_repository.go
+
 package repositories
 
 import (
 	"context"
 	"database/sql"
+	"errors"
+
 	"indiv/internal/domain/entities"
-	"indiv/internal/domain/repositories"
+	domain "indiv/internal/domain/repositories"
 )
 
 type UserRepository struct {
 	db *sql.DB
 }
 
-func NewUserRepository(db *sql.DB) repositories.UserRepository {
+func NewUserRepository(db *sql.DB) domain.UserRepository {
 	return &UserRepository{db: db}
 }
 
@@ -29,11 +32,24 @@ func (r *UserRepository) GetByID(ctx context.Context, id int64) (*entities.User,
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
-	return user, err
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }
 
 func (r *UserRepository) Update(ctx context.Context, user *entities.User) error {
 	query := "UPDATE users SET name = $1, balance = $2 WHERE id = $3"
-	_, err := r.db.ExecContext(ctx, query, user.Name, user.Balance, user.ID)
-	return err
+	result, err := r.db.ExecContext(ctx, query, user.Name, user.Balance, user.ID)
+	if err != nil {
+		return err
+	}
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if rowsAffected == 0 {
+		return errors.New("Пользователь не найден")
+	}
+	return nil
 }

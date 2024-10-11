@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package bid;
 
-option go_package = "github.com/yourusername/auction-system/api/proto/bid";
+option go_package = "indiv/api/proto/bid";
 
 service BidService {
   rpc PlaceBid(PlaceBidRequest) returns (PlaceBidResponse);
@@ -34,6 +34,4 @@ message GetBidsByAuctionRequest {
 message GetBidsByAuctionResponse {
   repeated Bid bids = 1;
 }
-
-
 

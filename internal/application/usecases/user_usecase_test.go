@@ -4,8 +4,8 @@ package usecases_test
 import (
 	"context"
 	"github.com/stretchr/testify/assert"
-	"github.com/yourusername/auction-system/internal/application/usecases"
-	"github.com/yourusername/auction-system/internal/domain/entities"
+	"indiv/internal/application/usecases"
+	"indiv/internal/domain/entities"
 	"testing"
 )
 

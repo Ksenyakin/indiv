@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package auction;
 
-option go_package = "github.com/yourusername/auction-system/api/proto/auction";
+option go_package = "indiv/proto/v1/auction";
 
 service AuctionService {
   rpc GetAuctionByID(GetAuctionByIDRequest) returns (GetAuctionByIDResponse);

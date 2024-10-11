@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package lot;
 
-option go_package = "github.com/yourusername/auction-system/api/proto/lot";
+option go_package = "indiv/proto/v1/lot";
 
 service LotService {
   rpc CreateLot(CreateLotRequest) returns (CreateLotResponse);

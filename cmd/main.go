@@ -11,6 +11,8 @@ import (
 	"indiv/pkg/database"
 	"indiv/pkg/logger"
 	"log"
+
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -37,15 +39,23 @@ func main() {
 
 	// Инициализация репозиториев
 	userRepo := repositories.NewUserRepository(db)
-	// Аналогично для других репозиториев
+	lotRepo := repositories.NewLotRepository(db)
+	bidRepo := repositories.NewBidRepository(db)
+	auctionRepo := repositories.NewAuctionRepository(db)
 
 	// Инициализация use cases
 	userUseCase := usecases.NewUserUseCase(userRepo)
-	// Аналогично для других use cases
+	lotUseCase := usecases.NewLotUseCase(lotRepo)
+	bidUseCase := usecases.NewBidUseCase(bidRepo, auctionRepo, userRepo)
+	auctionUseCase := usecases.NewAuctionUseCase(auctionRepo, bidRepo, userRepo)
+
+	// Запуск воркера
+	auctionWorker := workers.NewAuctionWorker(auctionUseCase, logger)
+	go auctionWorker.Run()
 
 	// Запуск gRPC сервера
 	go func() {
-		if err := grpc.RunServer(cfg.GRPCPort, userUseCase, logger); err != nil {
+		if err := grpc.RunServer(cfg.GRPCPort, userUseCase, lotUseCase, bidUseCase, auctionUseCase, logger); err != nil {
 			logger.Fatalf("Ошибка запуска gRPC сервера: %v", err)
 		}
 	}()
