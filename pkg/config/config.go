@@ -6,10 +6,14 @@ import (
 )
 
 type Config struct {
-	LogLevel string
-	GRPCPort string
-	RESTPort string
-	Database DatabaseConfig
+	LogLevel                  string
+	GRPCPort                  string
+	RESTPort                  string
+	Database                  DatabaseConfig
+	PaymentServiceURL         string
+	PaymentServiceAPIKey      string
+	NotificationServiceURL    string
+	NotificationServiceAPIKey string
 }
 
 type DatabaseConfig struct {
