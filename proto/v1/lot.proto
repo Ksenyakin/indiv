@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package lot;
+
+option go_package = "github.com/yourusername/auction-system/api/proto/lot";
+
+service LotService {
+  rpc CreateLot(CreateLotRequest) returns (CreateLotResponse);
+  rpc GetLotByID(GetLotByIDRequest) returns (GetLotByIDResponse);
+  rpc ListLots(ListLotsRequest) returns (ListLotsResponse);
+}
+
+message Lot {
+  int64 id = 1;
+  int64 seller_id = 2;
+  string title = 3;
+  string description = 4;
+  double starting_price = 5;
+  double min_bid_increment = 6;
+  string auction_start = 7; // ISO8601 datetime format
+  string auction_end = 8;   // ISO8601 datetime format
+}
+
+message CreateLotRequest {
+  int64 seller_id = 1;
+  string title = 2;
+  string description = 3;
+  double starting_price = 4;
+  double min_bid_increment = 5;
+  string auction_start = 6;
+  string auction_end = 7;
+}
+
+message CreateLotResponse {
+  Lot lot = 1;
+}
+
+message GetLotByIDRequest {
+  int64 id = 1;
+}
+
+message GetLotByIDResponse {
+  Lot lot = 1;
+}
+
+message ListLotsRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message ListLotsResponse {
+  repeated Lot lots = 1;
+}

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package bid;
+
+option go_package = "github.com/yourusername/auction-system/api/proto/bid";
+
+service BidService {
+  rpc PlaceBid(PlaceBidRequest) returns (PlaceBidResponse);
+  rpc GetBidsByAuction(GetBidsByAuctionRequest) returns (GetBidsByAuctionResponse);
+}
+
+message Bid {
+  int64 id = 1;
+  int64 auction_id = 2;
+  int64 bidder_id = 3;
+  double amount = 4;
+  string timestamp = 5; // ISO8601 datetime format
+}
+
+message PlaceBidRequest {
+  int64 auction_id = 1;
+  int64 bidder_id = 2;
+  double amount = 3;
+}
+
+message PlaceBidResponse {
+  Bid bid = 1;
+}
+
+message GetBidsByAuctionRequest {
+  int64 auction_id = 1;
+}
+
+message GetBidsByAuctionResponse {
+  repeated Bid bids = 1;
+}
+
+
+

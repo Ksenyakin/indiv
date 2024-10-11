@@ -4,7 +4,6 @@ package rest
 import (
 	"context"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/yourusername/auction-system/api/proto"
 	"google.golang.org/grpc"
 	"net/http"
 )

@@ -2,10 +2,11 @@
 package grpc
 
 import (
+	pb "/indiv/proto/v1"
 	"context"
-	pb "github.com/yourusername/auction-system/api/proto"
-	"github.com/yourusername/auction-system/internal/application/usecases"
-	"github.com/yourusername/auction-system/internal/domain/entities"
+
+	"indiv/internal/application/usecases"
+	"indiv/internal/domain/entities"
 )
 
 type UserServiceServer struct {

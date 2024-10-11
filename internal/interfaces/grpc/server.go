@@ -2,7 +2,6 @@
 package grpc
 
 import (
-	"github.com/yourusername/auction-system/api/proto"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"indiv/internal/application/usecases"

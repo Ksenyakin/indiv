@@ -2,15 +2,15 @@
 package main
 
 import (
-  "github.com/yourusername/auction-system/internal/application/usecases"
-  "github.com/yourusername/auction-system/internal/infrastructure/repositories"
-  "github.com/yourusername/auction-system/internal/interfaces/grpc"
-  "github.com/yourusername/auction-system/internal/interfaces/migration"
-  "github.com/yourusername/auction-system/internal/interfaces/rest"
-  "github.com/yourusername/auction-system/pkg/config"
-  "github.com/yourusername/auction-system/pkg/database"
-  "github.com/yourusername/auction-system/pkg/logger"
-  "log"
+	"indiv/internal/application/usecases"
+	"indiv/internal/infrastructure/repositories"
+	"indiv/internal/interfaces/grpc"
+	"indiv/internal/interfaces/migration"
+	"indiv/internal/interfaces/rest"
+	"indiv/pkg/config"
+	"indiv/pkg/database"
+	"indiv/pkg/logger"
+	"log"
 )
 
 func main() {
