@@ -1,0 +1,10 @@
+loglevel: "debug"
+grpcport: ":50051"
+restport: ":8080"
+database:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "password"
+  dbname: "auction_db"
+  sslmode: "disable"

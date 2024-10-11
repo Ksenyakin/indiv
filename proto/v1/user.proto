@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
+    rpc TopUpBalance(TopUpBalanceRequest) returns (TopUpBalanceResponse);
+}
+
+message User {
+    int64 id = 1;
+    string name = 2;
+    double balance = 3;
+}
+
+message CreateUserRequest {
+    string name = 1;
+}
+
+message CreateUserResponse {
+    User user = 1;
+}
+
+message GetUserByIDRequest {
+    int64 id = 1;
+}
+
+message GetUserByIDResponse {
+    User user = 1;
+}
+
+message TopUpBalanceRequest {
+    int64 user_id = 1;
+    double amount = 2;
+}
+
+message TopUpBalanceResponse {
+    User user = 1;
+}
