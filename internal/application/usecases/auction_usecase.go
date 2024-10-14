@@ -47,8 +47,8 @@ func (uc *AuctionUseCase) CloseAuction(ctx context.Context, id int64) (*entities
 	}
 
 	if highestBid != nil {
-		auction.WinnerID = highestBid.BidderID
-		auction.FinalPrice = highestBid.Amount
+		auction.WinnerID = &highestBid.BidderID
+		auction.FinalPrice = &highestBid.Amount
 
 		// Списание средств у победителя
 		winner, err := uc.userRepo.GetByID(ctx, highestBid.BidderID)

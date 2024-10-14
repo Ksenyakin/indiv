@@ -4,10 +4,9 @@ package workers
 
 import (
 	"context"
-	"time"
-
 	"go.uber.org/zap"
 	"indiv/internal/application/usecases"
+	"time"
 )
 
 type AuctionWorker struct {

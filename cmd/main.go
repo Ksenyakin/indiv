@@ -4,7 +4,7 @@ package main
 import (
 	"indiv/internal/application/usecases"
 	"indiv/internal/infrastructure/repositories"
-	"indiv/internal/interfaces/grpc"
+	"indiv/internal/infrastructure/workers"
 	"indiv/internal/interfaces/migration"
 	"indiv/internal/interfaces/rest"
 	"indiv/pkg/config"

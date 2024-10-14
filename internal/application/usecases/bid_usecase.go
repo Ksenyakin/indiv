@@ -34,6 +34,15 @@ func (uc *BidUseCase) PlaceBid(ctx context.Context, bid *entities.Bid) error {
 		return errors.New("Аукцион не открыт или не существует")
 	}
 
+	// Получение лота
+	lot, err := uc.lotRepo.GetByID(ctx, auction.LotID)
+	if err != nil {
+		return err
+	}
+	if lot == nil {
+		return errors.New("Лот не найден")
+	}
+
 	// Проверка баланса пользователя
 	user, err := uc.userRepo.GetByID(ctx, bid.BidderID)
 	if err != nil {
@@ -48,9 +57,9 @@ func (uc *BidUseCase) PlaceBid(ctx context.Context, bid *entities.Bid) error {
 
 	// Проверка минимального шага
 	highestBid, err := uc.bidRepo.GetHighestBid(ctx, bid.AuctionID)
-	minBid := auction.StartingPrice
+	minBid := lot.StartingPrice
 	if highestBid != nil {
-		minBid = highestBid.Amount + auction.MinBidIncrement
+		minBid = highestBid.Amount + lot.MinBidIncrement
 	}
 	if bid.Amount < minBid {
 		return errors.New("Сумма ставки недостаточна")
